@@ -1,5 +1,5 @@
 # poisson_gals
-We are using Jenni's data from her Master's thesis on fish from the Saint John River. For this study, two fish species (Smallmouth Bass and Yellow Perch) were caught at each of three location relative to the Mactaquac Dam: one upstream and two downstream. Fish were sexed, weighed and measured and their muscle tissue was collected for future analysis. Once in the lab, the fish were analyzed for mercury concentration. 
+We are using Jenni's data from her Master's thesis on fish from the Saint John River. The data file is called New_Brunswick_Fall_2020_fish_data.csv and attached to this repo. For this study, two fish species (Smallmouth Bass and Yellow Perch) were caught at each of three location relative to the Mactaquac Dam: one upstream and two downstream. Fish were sexed, weighed and measured and their muscle tissue was collected for future analysis. Once in the lab, the fish were analyzed for mercury concentration. 
 
 For this project, Sally and Jenni plan to use statistics to explore any patterns of mercury concentration based on different variables including species, sex, length, weight and site. From here, we have the following hypotheses:
 

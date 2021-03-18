@@ -8,7 +8,7 @@ For this project, Sally and Jenni plan to use statistics to explore any patterns
 3. Is mercury concentration higher in Smallmouth Bass than Yellow Perch, since Smallmouth Bass are positioned higher on the food web?
 4. Which parameter explains the most variation in merucry concentration?
 
-##Next steps and questions
+## Next steps and questions
 From here, we will look at the descriptive statistic for the parameters listed above. Since the response variable (mercury concentration) is a positive continuous variable, we will be using general linear models. Therefore, we can look at the diagnostic plots and see whether any transformations need to be made. 
 
 Jonathan mentioned using principal component analysis for looking at the different parameters correlated with mercury. We will look into what a PCA is. 

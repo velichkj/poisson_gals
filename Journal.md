@@ -2,4 +2,9 @@ First, we are going to look at some descriptive statistic, such as the min, mean
 
 Next, we will fit general linear models to mercury. We will look at the diagnostic plots to see if we need to make any transformations. Once we’ve made any necessary transformations are made, and the diagnostic plots look good, we will make summary tables to look at the clarity of weight, length, site, species, and sex on mercury concentration.
 
+JD: By "general" do you just mean lm() models? I wonder if there's a better word for that?
+
 Furthermore, we will be using PCAs to reduce the number of variables and identify the parameters contributing most significantly to variation among mercury. We will be reading more about PCAs and ho to code them in R. 
+
+JD: PCAs don't do the second thing you said ☺
+

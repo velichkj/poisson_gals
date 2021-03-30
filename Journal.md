@@ -20,3 +20,5 @@ Here, we're planning to learn how to extract the axes (PC1) from the PCA (we use
 
 For our next step, we are thinking of using a linear mixed effects model. 
 First, we will look at the diagnostic plots for the linear model with untransformed response variable (THg) to check whether it meets the assumptions. If not, we can try transforming the response variable (THg) using log or polynomial distributions, and check whether the diagnostic plots are improved.
+
+At the end of class, Ben took a look at our PCAs and noticed that the orientation of the ellipses for yellow perch and smallmouth bass were different. He suggested that we take a look at the PCA plots separately for each species. Upon doing this, we noticed a very influential datapoint in the yellow perch data (possibly an outlier in the gonad weight) so Jenni will take a look and we can check if this pattern persists once we get the cleaned data. 

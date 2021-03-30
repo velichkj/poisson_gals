@@ -14,3 +14,5 @@ From here, we will look at the descriptive statistic for the parameters listed a
 Jonathan mentioned using principal component analysis for looking at the different parameters correlated with mercury. We will look into what a PCA is. 
  
 Also, we are planning on adding another hypothesis regarding the effect of mercury on fish health. We are going to use the fish condition index, which is a ratio of the length to weight, and see whether it decreases with increasing mercury concentration. 
+
+**BMB**: in addition to Holmes and Huber's book (*Modern Statistics for Modern Biology*), [this](https://wilkelab.org/SDS375/slides/dimension-reduction-1.html#1) came up in my twitter feed today ... not actually very much extra, but maybe useful

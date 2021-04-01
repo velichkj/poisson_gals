@@ -22,3 +22,16 @@ For our next step, we are thinking of using a linear mixed effects model.
 First, we will look at the diagnostic plots for the linear model with untransformed response variable (THg) to check whether it meets the assumptions. If not, we can try transforming the response variable (THg) using log or polynomial distributions, and check whether the diagnostic plots are improved.
 
 At the end of class, Ben took a look at our PCAs and noticed that the orientation of the ellipses for yellow perch and smallmouth bass were different. He suggested that we take a look at the PCA plots separately for each species. Upon doing this, we noticed a very influential datapoint in the yellow perch data (possibly an outlier in the gonad weight) so Jenni will take a look and we can check if this pattern persists once we get the cleaned data. 
+
+**April 1st**
+Dear Journal,
+We revisited the PCA data. First, we removed the extreme outlier for yellow perch because it had a very high gonad weight, so we suspect it might be a data entry error. We also checked the 2 points in the SMB biplot which were not in the ellipse, to check whether they seemed reasonable, and they seemed biologically reasonable for their size. 
+
+Looking at the biplot of both species, we noticed that the orientation of the ellipses for YP and SMB are different. Here are the patterns we deduced from the PCA:
+With SMB, it seems like the total length, fork length, total weight, and gonad weight are all responding in the same positive direction. 
+With YP, gonad weight isnt increasing proportionally with size. 
+
+Next, we did a quick linear model to look at the relationship between fish weight and gonad weight, with comparisons between the 2 sexes and 2 species. 
+For SMB, there is a greater increase per unit increase of fish weight in females than males
+On the contrary, for YP, there is a greater increase per unit increase of fish weight in males than females. Interesting! 
+Next week we will look at how this linear model may explain what we see in the PCA. We'll think about it over easter with some mini eggs as fuel.

@@ -35,3 +35,30 @@ Next, we did a quick linear model to look at the relationship between fish weigh
 For SMB, there is a greater increase per unit increase of fish weight in females than males
 On the contrary, for YP, there is a greater increase per unit increase of fish weight in males than females. Interesting! 
 Next week we will look at how this linear model may explain what we see in the PCA. We'll think about it over easter with some mini eggs as fuel.
+
+**April 6th**
+After a discombobulated start, we decided that we need to determine linear/mixed/general model.. 
+Response: THg 
+Predictor: PC1 (size of fish), sex, species
+Start with linear model of THg, compare diagnostics with linear model of log(THg)
+Site as both predictor and random effect...(according to JD)
+Note - Sex is almost never a random effect, we want it to be fixed effect (because we have only 2 sexes)
+Need to decide whether we want to use the variables separately or if we want to use PC1. Note that it might be easier to use PC1 than the variables separately because the variables are so much more correlated
+
+Next, we assessed the diagnostic plots of linear models and compared a linear response variable with a log-transformed response variable. The diagnostic plots for log-transformed response variable looked better, especially for the Normal QQ plot and Scale-Location plot.  
+
+After this, we had an existential crisis about whether we want to evaluate both species together in the model, or complete separate models for each species individually. 
+So we decided to look at the diagnostic plots for THg vs PC1 for each of the species separately. 
+
+Advice on using *DHARMa* to plot residuals from Ben:
+Plot residuals against different variables to see whether there are particular "corners" of the data that are not being fitted well 
+- in a model we are hopping that there are no patterns in the residuals (extract all the info in the data and leave only noise)
+- however we cannot do that exactly... 
+- patterns in the residuals implies that there are patterns in the data that are not captured in the model, which might mess up the model and might also be interesting (for an example, if it is fitted as linear but the pattern is actually quadratic - this would show up in the diagnostic plot)
+- prediction vs residuals is a general way of looking at the values, but doesn't really tell us what the clusters of the points are, or if there are patterns, what are they associating?? plotting residuals helps us track down clusters of points (small fish? large fish?)
+
+It is simpler to compare species separately but then we lose the ability to make cross-species comparisons (we can't compare the response between SMB and YP)
+
+So to end this day, we dropped the fish samples without Hg values to use for our linear mixed-effects models. So we are using:
+df_YP_pca2, df_SMB_pca2
+We used the DHARMa package to plot residuals from the LMEMs. The diagnostic plots for YP looked good. However, for the diagnostic plot for SMB, there is a problem with the residuals vs predicted. We will revisit this next time. To Be Continued...

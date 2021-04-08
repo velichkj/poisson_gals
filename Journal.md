@@ -62,3 +62,13 @@ It is simpler to compare species separately but then we lose the ability to make
 So to end this day, we dropped the fish samples without Hg values to use for our linear mixed-effects models. So we are using:
 df_YP_pca2, df_SMB_pca2
 We used the DHARMa package to plot residuals from the LMEMs. The diagnostic plots for YP looked good. However, for the diagnostic plot for SMB, there is a problem with the residuals vs predicted. We will revisit this next time. To Be Continued...
+
+
+#April 8
+Consider putting date in as a random effect 
+Take site out as a random effect. We only have 3 sites so we want it to be fixed.
+We can use predict method to figure out what the large prediction values correspond to. They are large predicted values with low residual values. THat means we're underpredicting for our most extreme values (high biomass an they're higher than the model thinks they are). See if those 4 data points are weird that we haven't incorporated (find out which data points they are - look directly at data or some of the plots we made).
+
+Update: We looked for these fish with the greates Dim.1 and they are infact just really big so that might be driving the underpredicting for the large biomass fish as seen in the DHARMa residual vs predicted plot. 
+
+plot(allEffects(lmem_SMB)) - quick visualization of the model. These are mentioned in linear model lecture. We can also use dotwhisker::dwplot to look at coeeficients. 

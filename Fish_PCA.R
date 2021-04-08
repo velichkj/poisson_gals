@@ -1,10 +1,14 @@
 # Final project - PCA of Fish physical attributes #
-# install.packages("FactoMineR")
-# install.packages(("factoextra"))
-library("FactoMineR")
-library("factoextra")
-library("tidyverse")
+install.packages("FactoMineR")
+install.packages(("factoextra"))
+library(FactoMineR)
+library(factoextra)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
 theme_set(theme_bw())
+#install.packages(c("tidyr","readr","factoextra", "tidyverse"), type="binary")
+install.packages(c("FactoMineR"), type="binary")
 
 df<-read.csv("./New_Brunswick_Fall_2020_fish_data.csv") # choose clean data
 View(df)
@@ -106,8 +110,10 @@ ggplot(AllFish, aes(x= TotalWeight_g, y = GonadWeight_g, shape=Species, colour=S
 df_SMB_pca2 <- drop_na(df_SMB_pca, Hg_ug_per_kgww)
 df_YP_pca2 <- drop_na(df_YP_pca, Hg_ug_per_kgww)
 AllFish_pca2 <- drop_na(AllFish_pca, Hg_ug_per_kgww)
+View(df_YP_pca2)
+unique(df$Date)
 
-lmem <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+Species+(1|Site), 
+lmem <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+Species+(1|Date), 
              data=AllFish_pca2)
 
 
@@ -117,16 +123,27 @@ plot(ss)
 plotResiduals(ss, form=AllFish_pca2$Dim.1)
 
 # YP Separately
-lmem_YP <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+(1|Site), 
+lmem_YP <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+(1|Date), 
              data=df_YP_pca2)
 ss_YP <- simulateResiduals(lmem_YP)
 plot(ss_YP)
-plotResiduals(ss_YP, form=df_YP_pca2$Dim.1)
+packageVersion("TMB")
+install.packages("TMB")
+install.packages(c("broom.mixed"))
+installed.packages()
+library(broom.mixed)
+
+aa <- augment(lmem_YP)
+
+#plotResiduals(ss_YP, form=df_YP_pca2$Dim.1)
 
 # SMB Separately
 
-lmem_SMB <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+(1|Site), 
+lmem_SMB <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+(1|Date), 
                 data=df_SMB_pca2)
 ss_SMB <- simulateResiduals(lmem_SMB)
 plot(ss_SMB) 
-plotResiduals(ss_SMB, form=df_SMB_pca2$Dim.1)
+#plotResiduals(ss_SMB, form=df_SMB_pca2$Dim.1)
+
+library(effects)
+

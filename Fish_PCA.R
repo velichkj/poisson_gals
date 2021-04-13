@@ -1,14 +1,10 @@
 # Final project - PCA of Fish physical attributes #
-install.packages("FactoMineR")
-install.packages(("factoextra"))
 library(FactoMineR)
 library(factoextra)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
 theme_set(theme_bw())
 #install.packages(c("tidyr","readr","factoextra", "tidyverse"), type="binary")
-install.packages(c("FactoMineR"), type="binary")
+
 
 df<-read.csv("./New_Brunswick_Fall_2020_fish_data.csv") # choose clean data
 View(df)
@@ -38,7 +34,7 @@ fviz_pca_ind(fish.pca,
 
 fviz_pca_biplot(fish.pca, label ="var", # plot with Add arrows 
                 geom.ind = c("point","text"),
-                col.ind = AllFish$Sex, 
+                col.ind = AllFish$Species, 
                 legend.title = "Species", 
                 palette = c("#00AFBB", "#E7B800"),
                 addEllipses = TRUE, 
@@ -91,10 +87,28 @@ ind_YP <- get_pca_ind(YP.pca) # Coordinates of individuals
 scores_YP <- as.data.frame(ind_YP$coord) # These are principal components 1-5
 df_YP_pca <- data.frame(df_YP,scores_YP[,1:2]) #Complete fish dataframe with PCA values
 
+# for plotting# 
+library(gridExtra)
+library(grid)
+library(lattice)
+#
+a<-fviz_contrib(YP.pca, choice = "var", axes = 1, top = 10,
+             title = "Contribution of variables to Dimension 1 (Yellow Perch)") +
+        pres_theme
+b<-fviz_contrib(YP.pca, choice = "var", axes = 2, top = 10,
+             title = "Contribution of variables to Dimension 2 (Yellow Perch)")  +
+        pres_theme
+grid.arrange(a, b, nrow = 2)
+
 ind_SMB <- get_pca_ind(SMB.pca) # Coordinates of individuals
 scores_SMB <- as.data.frame(ind_SMB$coord) # These are principal components 1-5
 df_SMB_pca <- data.frame(df_SMB,scores_SMB[,1:2]) #Complete fish dataframe with PCA values
 
+c<-fviz_contrib(SMB.pca, choice = "var", axes = 1, top = 10,
+                title = "Contribution of variables to Dimension 1 (Smallmouth Bass)") + pres_theme
+d<-fviz_contrib(SMB.pca, choice = "var", axes = 2, top = 10,
+                title = "Contribution of variables to Dimension 2 (Smallmouth Bass)") + pres_theme
+grid.arrange(c, d, nrow = 2)
 
 ## linear model ## 
 library(lme4)
@@ -103,8 +117,9 @@ library(DHARMa)
 ggplot(AllFish, aes(x= TotalWeight_g, y = GonadWeight_g, shape=Species, colour=Sex, na.rm=TRUE)) +
         geom_point(size = 2.2) +
         geom_smooth(aes(x = TotalWeight_g, y = GonadWeight_g), method = "lm") +
-        labs(x="Total fish weight(g)", y="Gonad weight (g))", shape="Species", colour="Sex") +
-        facet_wrap("Species", scale="free_x")
+        labs(x="Total fish weight(g)", y="Gonad weight (g)", shape="Species", colour="Sex") +
+        facet_wrap("Species", scale="free_x")+
+        ggtitle("Total weight vs Gonad weight of males vs females in SMB and YP") +pres_theme
 
 # Remove fish where Hg wasn't measured
 df_SMB_pca2 <- drop_na(df_SMB_pca, Hg_ug_per_kgww)

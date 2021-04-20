@@ -91,6 +91,7 @@ df_YP_pca <- data.frame(df_YP,scores_YP[,1:2]) #Complete fish dataframe with PCA
 library(gridExtra)
 library(grid)
 library(lattice)
+pres_theme <- NULL
 #
 a<-fviz_contrib(YP.pca, choice = "var", axes = 1, top = 10,
              title = "Contribution of variables to Dimension 1 (Yellow Perch)") +
@@ -143,9 +144,9 @@ lmem_YP <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+(1|Date),
 ss_YP <- simulateResiduals(lmem_YP)
 plot(ss_YP)
 packageVersion("TMB")
-install.packages("TMB")
-install.packages(c("broom.mixed"))
-installed.packages()
+## install.packages("TMB")
+## install.packages(c("broom.mixed"))
+## installed.packages()
 library(broom.mixed)
 
 aa <- augment(lmem_YP)

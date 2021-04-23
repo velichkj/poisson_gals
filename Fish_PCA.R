@@ -174,3 +174,9 @@ e1 <- emmeans(lmem_YP,~Site, lmer.df = "satterthwaite")
 e1
 contrast(e1,"pairwise") #this doesn't work once we have 3 levels for site
 
+library(blme)
+blmem_YP <- blmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+(1|Date), 
+             data=df_YP_pca2)
+e1.b <- emmeans(blmem_YP,~Site)
+e1.b  ## more sensible
+contrast(e1.b,"pairwise") ## still busted

@@ -170,6 +170,7 @@ contrast(e2,"pairwise")
 plot(allEffects(lmem_YP))
 summary(lmem_YP)
 Anova(lmem_YP)
-e1 <- emmeans(lmem_YP,~Site)
+e1 <- emmeans(lmem_YP,~Site, lmer.df = "satterthwaite")
+e1
 contrast(e1,"pairwise") #this doesn't work once we have 3 levels for site
 

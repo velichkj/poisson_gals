@@ -2,6 +2,9 @@
 library(FactoMineR)
 library(factoextra)
 library(tidyverse)
+library(car)
+library(effects)
+library(emmeans)
 theme_set(theme_bw())
 #install.packages(c("tidyr","readr","factoextra", "tidyverse"), type="binary")
 
@@ -9,7 +12,7 @@ theme_set(theme_bw())
 df<-read.csv("./New_Brunswick_Fall_2020_fish_data.csv") # choose clean data
 View(df)
 
-badfish <- c("REF-SMB-A-12","REF-YP-A-38","NF-SMB-A-15") # possible outliers from gonad/liver
+badfish <- c("REF-SMB-A-12","REF-YP-A-38","NF-SMB-A-15", "FF-SMB-A-2") # possible outliers from gonad/liver
 
 
 AllFish <- df %>% # Extract rows with complete data
@@ -126,8 +129,10 @@ ggplot(AllFish, aes(x= TotalWeight_g, y = GonadWeight_g, shape=Species, colour=S
 df_SMB_pca2 <- drop_na(df_SMB_pca, Hg_ug_per_kgww)
 df_YP_pca2 <- drop_na(df_YP_pca, Hg_ug_per_kgww)
 AllFish_pca2 <- drop_na(AllFish_pca, Hg_ug_per_kgww)
-View(df_YP_pca2)
 unique(df$Date)
+
+df_SMB_pca2$Site <- factor(df_SMB_pca2$Site,levels=c("REF","NF","FF"))
+df_YP_pca2$Site <- factor(df_YP_pca2$Site,levels=c("REF","NF","FF"))
 
 lmem <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+Species+(1|Date), 
              data=AllFish_pca2)
@@ -141,25 +146,30 @@ plotResiduals(ss, form=AllFish_pca2$Dim.1)
 # YP Separately
 lmem_YP <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+(1|Date), 
              data=df_YP_pca2)
-ss_YP <- simulateResiduals(lmem_YP)
-plot(ss_YP)
-packageVersion("TMB")
-## install.packages("TMB")
-## install.packages(c("broom.mixed"))
-## installed.packages()
-library(broom.mixed)
+plot(simulateResiduals(lmem_YP))
 
+library(broom.mixed)
 aa <- augment(lmem_YP)
 
 #plotResiduals(ss_YP, form=df_YP_pca2$Dim.1)
 
 # SMB Separately
-
 lmem_SMB <- lmer(log(Hg_ug_per_kgww)~Dim.1+Sex+Site+(1|Date), 
                 data=df_SMB_pca2)
-ss_SMB <- simulateResiduals(lmem_SMB)
-plot(ss_SMB) 
-#plotResiduals(ss_SMB, form=df_SMB_pca2$Dim.1)
+plot(simulateResiduals(lmem_SMB))
+# plotResiduals(ss_SMB, form=df_SMB_pca2$Dim.1)
 
-library(effects)
+## LMEM results and post-hoc tests
+
+plot(allEffects(lmem_SMB)) # Yellow perch
+summary(lmem_SMB)
+Anova(lmem_SMB) 
+e2 <- emmeans(lmem_SMB,~Site) 
+contrast(e2,"pairwise")
+
+plot(allEffects(lmem_YP))
+summary(lmem_YP)
+Anova(lmem_YP)
+e1 <- emmeans(lmem_YP,~Site)
+contrast(e1,"pairwise") #this doesn't work once we have 3 levels for site
 

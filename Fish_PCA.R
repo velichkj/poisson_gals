@@ -35,7 +35,7 @@ fviz_pca_ind(fish.pca,
        legend.title = "Species", 
        label="var")
 
-fviz_pca_biplot(fish.pca, label ="var", # plot with Add arrows 
+both.biplot <- fviz_pca_biplot(fish.pca, label ="var", # plot with Add arrows 
         geom.ind = c("point","text"),
         col.ind = AllFish$Species, 
         legend.title = "Species", 

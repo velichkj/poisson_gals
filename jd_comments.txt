@@ -1,0 +1,12 @@
+This was well presented. I like the use of the supplement to increase clarity of presentation.
+
+Please distinguish work done for this project from work done beforehand ("we were unsuccessful at catching…")
+
+You should say whether you scaled your variables for PCA. Also, since PC1 is on an arbitrary scale, it would be good to scale that as well, by its standard deviation.
+
+You shouldn't report intercept P values unless you have a particular reason to.
+
+Some of your interpretations are not clear. In particular, you conclude that sex differences are not biologically meaningful, but imply that similar-looking differences in site for yellow perch are meaningful.
+
+It seems odd that you say the results from the figure are "supported" by the results from the table. Are they different analyses, or two ways of looking at the same analysis?
+
